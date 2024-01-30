@@ -1,7 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import TaskItem from "./TaskItem";
+// import TaskItem from "./TaskItem";
 import { RootState } from "../redux/store";
+import DraggableTaskItem from "./DraggableTaskItem";
 
 const TaskList: React.FC = () => {
   const filteredTasks = useSelector((state: RootState) => {
@@ -27,7 +28,7 @@ const TaskList: React.FC = () => {
     <ul>
       <li className="my-2 text-sm italic">All Your Notes Here...</li>
       {filteredTasks.map((task, index: number) => (
-        <TaskItem key={index} task={task} index={index} />
+        <DraggableTaskItem key={index} task={task} index={index} />
       ))}
     </ul>
   );

@@ -54,6 +54,16 @@ const taskSlice = createSlice({
     markAllCompleted: (state) => {
       state.tasks.forEach((task) => (task.completed = true));
     },
+    reorderTasks: (
+      state,
+      action: PayloadAction<{ dragIndex: number; hoverIndex: number }>
+    ) => {
+      const { dragIndex, hoverIndex } = action.payload;
+      const updatedTasks = [...state.tasks];
+      const [draggedTask] = updatedTasks.splice(dragIndex, 1);
+      updatedTasks.splice(hoverIndex, 0, draggedTask);
+      state.tasks = updatedTasks;
+    },
   },
 });
 
@@ -66,8 +76,8 @@ export const {
   filterTasks,
   updateSearchTerm,
   markAllCompleted,
+  reorderTasks,
 } = taskSlice.actions;
 
-export const taskReducer = taskSlice.reducer; // Exporting the reducer
-
-export type { TaskState }; // Exporting the types
+export const taskReducer = taskSlice.reducer;
+export type { Task, TaskState };
