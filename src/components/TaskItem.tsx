@@ -18,12 +18,15 @@ interface TaskItemProps {
   task: {
     text: string;
     completed: boolean;
+    createdAt: Date;
   };
   index: number;
 }
 
 const TaskItem: React.FC<TaskItemProps> = ({ task, index }) => {
   const dispatch = useDispatch();
+
+  const formattedDate = new Date(task.createdAt).toLocaleString();
 
   return (
     <li className="flex flex-col sm:flex-row sm:items-center justify-between border-b-2 py-2 gap-4">
@@ -36,6 +39,9 @@ const TaskItem: React.FC<TaskItemProps> = ({ task, index }) => {
         >
           {task.text}
         </span>
+      </div>
+      <div className="flex items-center">
+        <span className="text-gray-400">{formattedDate}</span>
       </div>
       <div className="space-x-3 ml-8">
         <button

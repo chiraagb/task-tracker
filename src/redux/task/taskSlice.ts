@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface Task {
   text: string;
   completed: boolean;
+  createdAt: Date;
 }
 
 interface TaskState {
@@ -22,7 +23,11 @@ const taskSlice = createSlice({
   initialState,
   reducers: {
     addTask: (state, action: PayloadAction<string>) => {
-      state.tasks.push({ text: action.payload, completed: false });
+      state.tasks.push({
+        text: action.payload,
+        completed: false,
+        createdAt: new Date(),
+      });
     },
     toggleTask: (state, action: PayloadAction<number>) => {
       const task = state.tasks[action.payload];
